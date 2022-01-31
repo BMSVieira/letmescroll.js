@@ -1,45 +1,61 @@
 
 /*-------------------------
+LetMeScroll.js
 Made by: Bruno Vieira
 --------------------------- */
 
-// TODO
-// Refresh da scroll bar sempre que se redimensiona a div
-// Colocar callback para inicio, fim e movimento
-
 class LetMeScroll {
+
     constructor(options) {
 
         const defaults = {
             selector : 'defaultId',
-            dimensions : {
-              width: "100%"
-            },
             config : {
-                storage : {
-                    captionOffset: false,
-                    playrateSpeed: false,
-                    captionSize: false
+                dimensions : {
+                    width : "100%",
+                    height : "500px"
+                },
+                scroll : {
+                    bottomOffset: 0
                 }
-            }
+            },
+            onEnd: function(){},
+            onTop: function(){},
+            onMove: function(){},
+            onDragStart: function(){}
         };      
 
         // Scroll Random ID
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
         
         this.selector = options.selector.substring(1) || defaults.selector.substring(1);
+        this.onEnd = options.onEnd || defaults.onEnd;
+        this.onTop = options.onTop || defaults.onTop;
+        this.onMove = options.onMove || defaults.onMove;
+        this.onDragStart = options.onDragStart || defaults.onDragStart;
+        this.onDragStop = options.onDragStop || defaults.onDragStop;
+
+        // Get default dimensions
+        options.config.dimensions == undefined ? options.config.dimensions = defaults.config.dimensions : options.config.dimensions
+        for(var key in defaults.config.dimensions)
+        { options.config.dimensions[key] == undefined ? options.config.dimensions[key] = defaults.config.dimensions[key] :  options.config.dimensions[key] = options.config.dimensions[key];}
+
+        options.config.scroll == undefined ? options.config.scroll = defaults.config.scroll : options.config.scroll
+        for(var key in defaults.config.scroll)
+        { options.config.scroll[key] == undefined ? options.config.scroll[key] = defaults.config.scroll[key] :  options.config.scroll[key] = options.config.scroll[key];}
 
         // Global
-        var _this = this;
-        var scrollContainer = 0;
-        var scrollContentWrapper = 0;
-        var scrollContent = 0;
-        var contentPosition = 0;
-        var scrollerBeingDragged = false;
-        var scroller = 0;
-        var topPosition;
-        var scrollerHeight;
-        var normalizedPosition = 1;
+        let _this = this;
+        let scrollContainer = 0;
+        let scrollContentWrapper = 0;
+        let scrollContent = 0;
+        let contentPosition = 0;
+        let scrollerBeingDragged = false;
+        let scroller = 0;
+        let topPosition;
+        let scrollerHeight;
+        let normalizedPosition = 1;
+        let reachedBottom = false;
 
         /*
         ** Detect OS
@@ -58,7 +74,6 @@ class LetMeScroll {
         ** Calculate Scrollbar Height
         */
         var calculateScrollerHeight = this.calculateScrollerHeight = function calculateScrollerHeight(evt) {
-            // *Calculation of how tall scroller should be
             var visibleRatio = scrollContainer.offsetHeight / scrollContentWrapper.scrollHeight;
             return visibleRatio * scrollContainer.offsetHeight;
         }
@@ -67,25 +82,48 @@ class LetMeScroll {
         ** Move Scroll
         */
         var moveScroller = this.moveScroller = function moveScroller(evt) {
+            
             // Move Scroll bar to top offset
             var scrollPercentage = evt.target.scrollTop / scrollContentWrapper.scrollHeight;
-            topPosition = scrollPercentage * (scrollContainer.offsetHeight - 3); // 5px arbitrary offset so scroll bar doesn't move too far beyond content wrapper bounding box
+            topPosition = scrollPercentage * scrollContainer.offsetHeight;
             scroller.style.top = topPosition + 'px';
+
+            // Dispatch event when movement is detected
+            if (typeof _this.onMove == "function") { _this.onMove(); } 
+
+            // Check if scroll reached end, if yes callback to function
+            let bottomOffset = Number(scrollContentWrapper.scrollTopMax) - Number(options.config.scroll.bottomOffset);
+            if(evt.target.scrollTop >= bottomOffset || evt.target.scrollTop == scrollContentWrapper.scrollTopMax)
+            {
+                if(reachedBottom == false){ if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true; }
+            } else { reachedBottom = false; }
+
+            if(evt.target.scrollTop <= 0)
+            {
+                if (typeof _this.onTop == "function") { _this.onTop(); }
+            }
+
         }
 
         /*
         ** Start Drag Event
         */
         var startDrag = this.startDrag = function startDrag(evt) {
+
             normalizedPosition = evt.pageY;
             contentPosition = scrollContentWrapper.scrollTop;
             scrollerBeingDragged = true;
+
+            // Dispatch event when drag is starting
+            if (typeof _this.onDragStart == "function") { _this.onDragStart(); } 
         }
 
         /*
         ** Stop Drag Event
         */
         var stopDrag = this.stopDrag = function stopDrag(evt) {
+
+            // Dispatch event when drag is stoppped
             scrollerBeingDragged = false;
         }
 
@@ -101,64 +139,140 @@ class LetMeScroll {
         }
 
         /*
+        ** Refresh scrollbar height
+        */
+        var refreshScroll = this.refreshScroll = function refreshScroll(evt) {
+        
+            scrollerHeight = calculateScrollerHeight();
+            scroller.style.height = scrollerHeight + 'px';
+        }
+
+        /*
+        ** Main throttle function
+        */
+        function throttle (func, interval) {
+            var timeout;
+            return function() {
+                var context = this, args = arguments;
+                var later = function () {
+                    timeout = false;
+                };
+                if (!timeout) {
+                    func.apply(context, args)
+                    timeout = true;
+                    setTimeout(later, interval)
+                }
+            }
+        }
+
+        /*
         ** Scroll Structure
         */
         var SetupScroll = this.SetupScroll = function SetupScroll() {
 
             // Obter o element
-            var selectorElement = document.getElementById(this.selector);
-            var selectorElementHTML = selectorElement.innerHTML;
+            let selectorElement = document.getElementById(this.selector);
+
+            selectorElement.classList.add("lms_scrollable");
+            selectorElement.style.cssText = 'width:'+options.config.dimensions.width+';height:'+options.config.dimensions.height;
+
+            let selectorElementHTML = selectorElement.innerHTML;
+            selectorElement.innerHTML = "";
 
             // Criar uma div e colocar la todo o conteudo
-            selectorElement.insertAdjacentHTML("afterbegin", "<div id='scroll_inner_"+randomID+"' class='content-wrapper'></div>");
-            var scrollInner = document.getElementById("scroll_inner_"+randomID);
-
-            scrollInner.insertAdjacentHTML("afterbegin", "<div id='scroll_content_"+randomID+"' class='content'></div>");
-            var scrollContent = document.getElementById("scroll_content_"+randomID);
-
+            selectorElement.insertAdjacentHTML("afterbegin", "<div id='scroll_inner_"+randomID+"' class='lms_content_wrapper'></div>");
+            let scrollInner = document.getElementById("scroll_inner_"+randomID);
+  
+            scrollInner.insertAdjacentHTML("afterbegin", "<div id='scroll_content_"+randomID+"' class='lms_content'></div>");
+            let scrollContent = document.getElementById("scroll_content_"+randomID);
             scrollContent.innerHTML = selectorElementHTML;
+
+            this.scrollElement = scrollInner;
             this.scrollContent = scrollContent;
+            this.mainElement = selectorElement;
 
             scrollContainer = selectorElement;
             scrollContentWrapper = scrollInner;
 
-                // Creates scroller element and appends to '.scrollable' div
+                // Creat scrollbar div
                 scroller = document.createElement("div");
-                scroller.className = 'scroller';
-
+                scroller.className = 'lms_scroller';
                 this.scroller = scroller;
-                // determine how big scroller should be based on content
+
+                // Calculate scrollbar height
                 scrollerHeight = calculateScrollerHeight();
                 
                 if (scrollerHeight / scrollContainer.offsetHeight < 1){
-                    // *If there is a need to have scroll bar based on content size
+
+                    // Apply scrollbar height
                     scroller.style.height = scrollerHeight + 'px';
 
-                    // append scroller to scrollContainer div
+                    // Append scroller to scrollContainer div
                     scrollContainer.appendChild(scroller);
                     
-                    // show scroll path divot
-                    scrollContainer.className += ' showScroll';
+                    // Show scroll path divot
+                    scrollContainer.className += ' lms_showScroll';
                     
-                    // attach related draggable listeners
+                    // Attach related draggable listeners
                     scroller.addEventListener('mousedown', startDrag);
                     window.addEventListener('mouseup', stopDrag);
-                    window.addEventListener('mousemove', scrollBarScroll)
+                    window.addEventListener('mousemove', scrollBarScroll);
+
+
                 }
                 
                 // *** Listeners ***
                 scrollContentWrapper.addEventListener('scroll', moveScroller);
-
         }
 
-        // Setup
+        // Init
         this.SetupScroll();
 
+        // Refresh content
+        var ResizeWindow = throttle(function() {
+            refreshScroll();
+        }, 10);
+
+        // Add EventListener
+        window.addEventListener('resize', ResizeWindow);
+    }
+
+    /*
+    ** Methods
+    */
+
+    // Scroll to specific value
+    scrollTo(value)
+    {
+        // Reset current scroll position
+        this.scroller.style.top = "0px";
+        this.scrollElement.scrollTop = 0;
+
+        // Scroll to given value
+        this.scroller.style.top = value+"px";
+        this.scrollElement.scrollTop = value;
+      
+    }
+
+    // Destroy scrollbar and unbind all its events
+    destroy()
+    {
+            // Store content from inner divs
+            let tempContent = this.scrollContent.innerHTML;
+
+            // Remove all inner divs and all its events
+            this.scrollContent.remove();
+            this.scrollElement.remove();
+
+            // Places content inside original div again and removes all classes associated with LetMeScroll.js
+            this.mainElement.innerHTML = tempContent;
+            this.mainElement.classList.remove("lms_scrollable");
+            this.mainElement.classList.remove("lms_showScroll");
     }
 }
 
 // Export module to use it in browser and NodeJS
 try {
-   module.exports = exports = Moovie;
+   module.exports = exports = LetMeScroll;
 } catch (e) {}
 

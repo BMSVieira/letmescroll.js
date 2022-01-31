@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>letMeScroll.js</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        
+        <!-- DEMO ONLY -->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200&display=swap" rel="stylesheet"> 
+        
+        <!-- LetMeScroll Core CSS -->
+        <link href="../css/scroll.css" rel="stylesheet" />
+        <style>
+
+        pre p{
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .pre_bottom
+        {
+            color: #d371ff;
+        }
+        .pre_moving
+        {
+            color: #75c152;
+        }
+        .pre_started
+        {
+            color: #29c3ff;
+        }
+        .pre_stopped
+        {
+            color: #ff6c00;
+        }
+
+        .ball {
+            width: 25px;
+            height: 25px;
+            border-radius: 100%;
+            position: relative;
+            float: left;
+            margin-right: 7px;
+            cursor: pointer;
+        }
+
+        .red {
+            background-color: #ff3f3f;
+        }
+
+        .green {
+            background-color: #3ed232;
+        }
+
+        .purple {
+            background-color: #ba08ec;
+        }
+
+        .blue {
+            background-color: #1c6ce8;
+        }
+
+        .orange {
+            background-color: orange;
+        }
+
+        .yellow {
+            background-color: #b9b724;
+        }
+        </style>
+    </head>
+    <body style="background-color: #0c1117; color:white;">
+        <!-- Icons Grid-->
+        <section >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12" style="border-bottom: 1px solid #1c2939; margin-bottom: 60px;">
+                        <div class="mb-5 mb-lg-0 mb-lg-3" style="text-align:center; margin-top:70px; margin-bottom:55px!important;">
+                                <img src="img/letMeScroll.png" style="max-width:600px; width:40%;">
+                        <p style=" font-size: 32pt; color: white; font-family: 'Cairo', sans-serif;">Scroll made easy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                            <div id="scrollme">
+                                <h3>Super easy-to-use scrollbar</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus maxime quasi. Recusandae optio nobis ratione iste consectetur consequatur cupiditate <a href="#test">voluptatem</a> saepe laborum natus neque a provident eum explicabo delectus qui accusantium nostrum reiciendis soluta hic ut at sed laboriosam possimus repudiandae deserunt velit rerum. Aliquam ratione itaque corrupti aperiam quisquam unde aspernatur odio id repellendus corporis eaque expedita in ab minus possimus! Quo tempore consequatur repellat consectetur nemo molestiae perferendis ipsum esse nesciunt blanditiis nobis dicta? Laudantium quaerat inventore deleniti exercitationem explicabo quos pariatur sunt earum labore sed eius blanditiis architecto consequuntur ad consectetur unde sapiente nisi. Sunt eos.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus maxime voluptatem quasi. Recusandae optio nobis ratione iste consectetur consequatur cupiditate saepe laborum natus neque a provident eum explicabo delectus qui accusantium nostrum reiciendis soluta hic ut at sed laboriosam possimus repudiandae deserunt velit rerum. Aliquam ratione itaque corrupti aperiam quisquam unde aspernatur odio id repellendus corporis eaque expedita in ab minus possimus! Quo tempore consequatur repellat consectetur nemo molestiae perferendis ipsum esse nesciunt blanditiis nobis dicta? Laudantium quaerat inventore deleniti exercitationem explicabo quos pariatur sunt earum labore sed eius blanditiis architecto consequuntur ad consectetur unde sapiente nisi. Sunt eos.</p>
+                                <p><a name="test">voluptatem </a>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus maxime voluptatem quasi. Recusandae optio nobis ratione iste consectetur consequatur cupiditate saepe laborum natus neque a provident eum explicabo delectus qui accusantium nostrum reiciendis soluta hic ut at sed laboriosam possimus repudiandae deserunt velit rerum. Aliquam ratione itaque corrupti aperiam quisquam unde aspernatur odio id repellendus corporis eaque expedita in ab minus possimus! Quo tempore consequatur repellat consectetur nemo molestiae perferendis ipsum esse nesciunt blanditiis nobis dicta? Laudantium quaerat inventore deleniti exercitationem explicabo quos pariatur sunt earum labore sed eius blanditiis architecto consequuntur ad consectetur unde sapiente nisi. Sunt eos.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus maxime voluptatem quasi. Recusandae optio nobis ratione iste consectetur consequatur cupiditate saepe laborum natus neque a provident eum explicabo delectus qui accusantium nostrum reiciendis soluta hic ut at sed laboriosam possimus repudiandae deserunt velit rerum. Aliquam ratione itaque corrupti aperiam quisquam unde aspernatur odio id repellendus corporis eaque expedita in ab minus possimus! Quo tempore consequatur repellat consectetur nemo molestiae perferendis ipsum esse nesciunt blanditiis nobis dicta? Laudantium quaerat inventore deleniti exercitationem explicabo quos pariatur sunt earum labore sed eius blanditiis architecto consequuntur ad consectetur unde sapiente nisi. Sunt eos.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus maxime voluptatem quasi. Recusandae optio nobis ratione iste consectetur consequatur cupiditate saepe laborum natus neque a provident eum explicabo delectus qui accusantium nostrum reiciendis soluta hic ut at sed laboriosam possimus repudiandae deserunt velit rerum. Aliquam ratione itaque corrupti aperiam quisquam unde aspernatur odio id repellendus corporis eaque expedita in ab minus possimus! Quo tempore consequatur repellat consectetur nemo molestiae perferendis ipsum esse nesciunt blanditiis nobis dicta? Laudantium quaerat inventore deleniti exercitationem explicabo quos pariatur sunt earum labore sed eius blanditiis architecto consequuntur ad consectetur unde sapiente nisi. Sunt eos.</p>
+                               
+                            </div>
+                        </div>
+
+                            <div style="margin-top: 5px; margin-bottom: 55px;">
+                            <pre style=" color: #d2d2d2; margin-bottom: 6px; margin-top:40px;">Change scroll color:</pre>
+                                <div onclick="ChangeColor('#ff3f3f', 'rgb(49, 10, 10)')" class="ball red"></div>
+                                <div onclick="ChangeColor('#3ed232', 'rgba(3, 34, 0, 0.7)')" class="ball green"></div>
+                                <div onclick="ChangeColor('#ba08ec', 'rgba(31, 0, 34, 0.7)')" class="ball purple"></div>       
+                                <div onclick="ChangeColor('#1c6ce8', 'rgb(8, 35, 64)')" class="ball blue"></div>
+                                <div onclick="ChangeColor('#d29524', 'rgba(43, 32, 11, 0.9)')" class="ball orange"></div>
+                                <div onclick="ChangeColor('#b9b724', 'rgba(0, 0, 0, 0.9)')" class="ball yellow"></div>                                    
+                            </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                            <div style="margin-bottom:25px;">
+                                <button style="cursor:pointer;" type="button" onclick="showMenu('code')" class="btn btn-dark  btn-sm">Show code</button>
+                                <button style="cursor:pointer;" type="button" onclick="showMenu('console')" class="btn btn-dark  btn-sm">Show Console</button>
+                            </div>
+                            <div id="id_console">
+                            <pre id="lms_console" style="background-color: #070b0f; padding: 15px; height:240px; overflow-y:hidden; border-radius:8px;">
+Event console...
+                            </pre>
+                            </div>
+                            <div id="id_code" style="display:none;">
+<!-- HTML generated using hilite.me --><div style="overflow:auto;width:auto;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #d0d0d0">demo1</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">LetMeScroll({</span>
+    <span style="color: #d0d0d0">selector:</span> <span style="color: #ed9d13">&quot;#scrollme&quot;</span><span style="color: #d0d0d0">,</span>
+    <span style="color: #d0d0d0">config</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">{</span>
+        <span style="color: #d0d0d0">dimensions</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">{</span>
+            <span style="color: #d0d0d0">width</span> <span style="color: #d0d0d0">:</span> <span style="color: #ed9d13">&quot;auto&quot;</span><span style="color: #d0d0d0">,</span>
+            <span style="color: #d0d0d0">height</span> <span style="color: #d0d0d0">:</span> <span style="color: #ed9d13">&quot;300px&quot;</span>
+        <span style="color: #d0d0d0">},</span>
+        <span style="color: #d0d0d0">scroll</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">{</span>
+          <span style="color: #d0d0d0">bottomOffset:</span> <span style="color: #3677a9">0</span>
+        <span style="color: #d0d0d0">}</span>
+    <span style="color: #d0d0d0">},</span>
+    <span style="color: #d0d0d0">onEnd:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
+    <span style="color: #d0d0d0">onTop:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
+    <span style="color: #d0d0d0">onMove:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
+    <span style="color: #d0d0d0">onDragStart:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){}</span>
+<span style="color: #d0d0d0">});</span>
+</pre></div>
+                                
+                            </div>
+                            <div id="id_html" style="display:none;">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="../js/scroll.js"></script>
+        <script>
+        var demo1;
+        document.addEventListener("DOMContentLoaded", function() {
+                 demo1 = new LetMeScroll({
+                  selector: "#scrollme",
+                  config : {
+                        dimensions : {
+                            width : "auto",
+                            height : "300px"
+                        },
+                        scroll : {
+                          bottomOffset: 0
+                        }
+                  },
+                  onEnd: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_bottom'><b style='color:#ededed'>onEnd:</b> Scroll has reached the end.</p>");
+                  },
+                  onTop: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_bottom'><b style='color:#ededed'>onTop:</b>  Scroll is at the top.</p>");
+                  },
+                  onMove: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_moving'><b style='color:#ededed'>onMove:</b>  Scroll moved.</p>");
+                  },
+                  onDragStart: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_started'><b style='color:#ededed'>onDragStart:</b>  Drag has started.</p>");
+                  }
+                });
+        });
+
+        function ChangeColor(cor, fundo)
+        {
+            document.documentElement.style.setProperty("--lms_scrollbar_bg", cor);
+            document.documentElement.style.setProperty("--lms_scrollpath_bg", fundo);
+           
+        }
+
+        function showMenu(value)
+        {
+
+            if(value == 'console')
+            {
+                document.getElementById("id_code").style.display = "none";
+                document.getElementById("id_html").style.display = "none";
+                document.getElementById("id_console").style.display = "block";
+            }
+            if(value == 'code')
+            {
+                document.getElementById("id_code").style.display = "block";
+                document.getElementById("id_html").style.display = "none";
+                document.getElementById("id_console").style.display = "none";                
+            }
+        }
+
+
+        </script>
+    </body>
+</html>
