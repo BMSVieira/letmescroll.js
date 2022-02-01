@@ -92,12 +92,26 @@ class LetMeScroll {
             if (typeof _this.onMove == "function") { _this.onMove(); } 
 
             // Check if scroll reached end, if yes callback to function
-            let bottomOffset = Number(scrollContentWrapper.scrollTopMax) - Number(options.config.scroll.bottomOffset);
-            if(evt.target.scrollTop >= bottomOffset || evt.target.scrollTop == scrollContentWrapper.scrollTopMax)
+            if(scrollContentWrapper.scrollTopMax != undefined) // For Gecko Engine (Mozilla)
             {
-                if(reachedBottom == false){ if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true; }
-            } else { reachedBottom = false; }
+                var bottomScroll = Number(scrollContentWrapper.scrollTopMax);
+                var test = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
+                if(evt.target.scrollTop == scrollContentWrapper.scrollTopMax)
+                {
+                    if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                }
 
+            } else { // For Chromium Engine
+                
+                var bottomScroll = Number(scrollContentWrapper.scrollTop);
+                var test = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
+                if(evt.target.scrollTop == scrollContentWrapper.scrollTopMax || Math.ceil(bottomScroll) == test)
+                {
+                    if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                }
+            }
+
+            // Reached top
             if(evt.target.scrollTop <= 0)
             {
                 if (typeof _this.onTop == "function") { _this.onTop(); }
@@ -257,18 +271,33 @@ class LetMeScroll {
     // Destroy scrollbar and unbind all its events
     destroy()
     {
-            // Store content from inner divs
-            let tempContent = this.scrollContent.innerHTML;
+        // Store content from inner divs
+        let tempContent = this.scrollContent.innerHTML;
 
-            // Remove all inner divs and all its events
-            this.scrollContent.remove();
-            this.scrollElement.remove();
+        // Remove all inner divs and all its events
+        this.scrollContent.remove();
+        this.scrollElement.remove();
 
-            // Places content inside original div again and removes all classes associated with LetMeScroll.js
-            this.mainElement.innerHTML = tempContent;
-            this.mainElement.classList.remove("lms_scrollable");
-            this.mainElement.classList.remove("lms_showScroll");
+        // Places content inside original div again and removes all classes associated with LetMeScroll.js
+        this.mainElement.innerHTML = tempContent;
+        this.mainElement.classList.remove("lms_scrollable");
+        this.mainElement.classList.remove("lms_showScroll");
     }
+
+    // Refresh scroll
+    refresh()
+    {
+        // Refresh scrollbar height
+        this.refreshScroll();
+    }
+
+    // rebuild scroll
+    build()
+    {
+        // rebuild scroll
+        this.SetupScroll();
+    }
+
 }
 
 // Export module to use it in browser and NodeJS
