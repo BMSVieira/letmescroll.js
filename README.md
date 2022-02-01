@@ -1,9 +1,9 @@
-<p align="center">
+<br><p align="center">
 <img width="450" src="https://raw.githubusercontent.com/BMSVieira/letmescroll.js/main/demo/img/letmescroll.png?token=GHSAT0AAAAAABLNGOUJ6XQPSAWIBDLY5ZZEYPZUQ3A">
 </p>
 
 
-<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-demo">Demo</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-installation-browser">Installation</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-api--methods">Methods</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-callbacks">Callbacks</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-styling-">Styling</a></b>  
+<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-demo">Demo</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-installation-browser">Installation</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-methods">Methods</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-callbacks">Callbacks</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-styling-">Styling</a></b>  
  
 
 ◼️ Features:
@@ -17,7 +17,7 @@
 
 ◼️ Demo:
 -
-https://mooviejs.com/
+https://bmsvieira.github.io/letmescroll.js/index.html
 
 ◼️ Installation (Browser):
 -
