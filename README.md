@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 ```
 
-◼️ API > Methods:
+◼️ Methods:
 -
 
 <b>destroy:</b>
