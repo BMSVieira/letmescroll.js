@@ -3,7 +3,7 @@
 </p>
 
 
-<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-demo">Demo</a></b> - <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Installation</a></b> - <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Methods</a></b> - <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Styling</a></b>  
+<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-demo">Demo</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-installation-browser">Installation</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-api--methods">Methods</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-callbacks">Callbacks</a></b> - <b><a href="https://github.com/BMSVieira/letmescroll.js#%EF%B8%8F-styling-">Styling</a></b>  
  
 
 ◼️ Features:
