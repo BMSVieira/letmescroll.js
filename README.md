@@ -17,7 +17,7 @@
 
 ◼️ Demo:
 -
-https://mooviejs.com/
+https://bmsvieira.github.io/letmescroll.js/index.html
 
 ◼️ Installation (Browser):
 -
