@@ -20,18 +20,6 @@ Made by: Bruno Vieira
     max-width: 99%; /* 1% is for the scrollbar div */
 }
 
-.lms_scrollable:active .lms_scroller
-{
-    transition: opacity 0.5s ease;
-    opacity:1;
-}
-
-.lms_scrollable:hover .lms_scroller
-{
-    transition: opacity 0.5s ease;
-    opacity:1;
-}
-
 .lms_scrollable.lms_showScroll::after {
     position: absolute;
     content: '';
@@ -57,7 +45,6 @@ Made by: Bruno Vieira
 }
 
 .lms_scroller {
-    opacity:0;
     z-index: 5;
     cursor: pointer;
     position: absolute;
