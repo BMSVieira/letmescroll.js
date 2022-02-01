@@ -3,7 +3,7 @@
 </p>
 
 
-<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-demo">Demo</a></b> 🔸 <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Installation</a></b> 
+<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-demo">Demo</a></b> - <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Installation</a></b> - <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Methods</a></b> - <b><a href="https://github.com/BMSVieira/moovie.js#%EF%B8%8F-installation-browser">Styling</a></b>  
  
 
 ◼️ Features:
@@ -81,10 +81,46 @@ demo.refresh();
 <b>scrollTo:</b>
 Scroll to specific location (px)
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | `int` | Jump to specific location in the container |
+Type | Description |
+| --- | --- |
+| `int` | Jump to specific location in the container |
 
 ```javascript
 demo.scrollTo(200);
 ```
+ 
+◼️ Callbacks:
+-
+
+There are multiple callbacks you can use when building a new instance.
+
+```javascript
+// Called when scrollbar reaches the bottom.
+onEnd: function(){ <!-- CODE HERE --> }
+```
+```javascript
+// Called when scrollbar reaches the top
+onTop: function(){ <!-- CODE HERE --> }
+```
+```javascript
+// Called everytime scrollbar moves
+onMove: function(){ <!-- CODE HERE --> }
+```
+```javascript
+// Called when Drag starts
+onDragStart: function(){ <!-- CODE HERE --> }
+```
+ 
+◼️ Styling :
+-
+
+Using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank">CSS Custom Properties</a> you can easily customize your scrollbar. 
+<br>Check below a list of variables and what they are used for:
+
+| Name | Description | Default |
+| --- | --- | --- |
+| `--lms_scrollbar_bg` | Scrollbar background-color | `#868686`|
+| `--lms_scrollbar_radius` | Scrollbar border-radius  | `5px`|
+| `--lms_scrollpath_bg`| Scrollbar path background-color | `transparent`|
+| `--lms_scrollpath_radius`| Scrollbar path border-radius | `5px`|
+
