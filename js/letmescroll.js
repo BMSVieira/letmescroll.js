@@ -98,16 +98,28 @@ class LetMeScroll {
                 var test = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
                 if(evt.target.scrollTop == scrollContentWrapper.scrollTopMax)
                 {
-                    if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                    if(reachedBottom == false)
+                    {
+                        if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                        reachedBottom = true;
+                    }
+                } else {
+                    reachedBottom = false;
                 }
 
             } else { // For Chromium Engine
                 
                 var bottomScroll = Number(scrollContentWrapper.scrollTop);
                 var test = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
-                if(evt.target.scrollTop == scrollContentWrapper.scrollTopMax || Math.ceil(bottomScroll) == test)
+                if(evt.target.scrollTop >= scrollContentWrapper.scrollTopMax || Math.ceil(bottomScroll) >= test)
                 {
-                    if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                    if(reachedBottom == false)
+                    {
+                        if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                        reachedBottom = true;
+                    }
+                } else {
+                    reachedBottom = false;
                 }
             }
 
