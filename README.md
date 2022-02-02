@@ -17,7 +17,7 @@
 
 ◼️ Demo:
 -
-https://bmsvieira.github.io/letmescroll.js/index.html
+https://bmsvieira.github.io/letmescroll.js/
 
 ◼️ Installation (Browser):
 -
