@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
                height : "500px"
            },
            scroll : {
-             bottomOffset: 0
+             bottomOffset: 0,
+             autoHide: true
            }
      }
    });
@@ -110,7 +111,10 @@ onMove: function(){ <!-- CODE HERE --> }
 // Called when Drag starts
 onDragStart: function(){ <!-- CODE HERE --> }
 ```
- 
+```javascript
+// Called when Drag Stops
+onDragStop: function(){ <!-- CODE HERE --> }
+```
 ◼️ Styling :
 -
 
