@@ -83,51 +83,70 @@ class LetMeScroll {
         */
         var moveScroller = this.moveScroller = function moveScroller(evt) {
             
+            var newBottomOffset, bottomScroll; 
+
             // Move Scroll bar to top offset
             var scrollPercentage = evt.target.scrollTop / scrollContentWrapper.scrollHeight;
             topPosition = scrollPercentage * scrollContainer.offsetHeight;
             scroller.style.top = topPosition + 'px';
 
-            // Dispatch event when movement is detected
+            // onMove callback()
             if (typeof _this.onMove == "function") { _this.onMove(); } 
 
-            // Check if scroll reached end, if yes callback to function
-            if(scrollContentWrapper.scrollTopMax != undefined) // For Gecko Engine (Mozilla)
-            {
-                var bottomScroll = Number(scrollContentWrapper.scrollTopMax);
-                var test = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
-                if(evt.target.scrollTop == scrollContentWrapper.scrollTopMax)
-                {
-                    if(reachedBottom == false)
-                    {
-                        if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
-                        reachedBottom = true;
-                    }
-                } else {
-                    reachedBottom = false;
-                }
+            // onEnd callback()
+            if(scrollContentWrapper.scrollTopMax != undefined)
+            {   
+                    // ###################################################
+                    // For Gecko Engine (Mozilla)
+                    // ###################################################
 
-            } else { // For Chromium Engine
-                
-                var bottomScroll = Number(scrollContentWrapper.scrollTop);
-                var test = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
-                if(evt.target.scrollTop >= scrollContentWrapper.scrollTopMax || Math.ceil(bottomScroll) >= test)
-                {
-                    if(reachedBottom == false)
+                    bottomScroll = Number(scrollContentWrapper.scrollTopMax);
+
+                    // Check if exists bottomOffset
+                    if(options.config.scroll.bottomOffset > 0)
                     {
-                        if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
-                        reachedBottom = true;
-                    }
-                } else {
-                    reachedBottom = false;
-                }
+                        newBottomOffset = Number(scrollContentWrapper.scrollTopMax) - Number(options.config.scroll.bottomOffset);
+                    } else {  newBottomOffset = scrollContentWrapper.scrollTopMax; }
+
+                    if(evt.target.scrollTop >= newBottomOffset)
+                    {
+                        // Check if scroll is current in reachedBottom state, so scroll can move further without trigger any callback
+                        if(reachedBottom == false)
+                        {
+                            if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                            reachedBottom = true;
+                        }
+                    } else { reachedBottom = false;  }
+
+            } else { 
+                    
+                    // ###################################################
+                    // // For Chromium Engine (Chrome, Opera, Edge..)
+                    // ###################################################
+
+                    bottomScroll = Number(scrollContentWrapper.scrollTop);
+                    var ChromiumEngineBottom = scrollContentWrapper.scrollHeight - scrollContentWrapper.clientHeight; 
+                    
+                    // Check if exists bottomOffset
+                    if(options.config.scroll.bottomOffset > 0)
+                    {
+                        newBottomOffset = ChromiumEngineBottom - Number(options.config.scroll.bottomOffset);
+                    } else { newBottomOffset = ChromiumEngineBottom; }
+
+                    if(Math.ceil(bottomScroll) >= newBottomOffset)
+                    {
+                        // Check if scroll is current in reachedBottom state, so scroll can move further without trigger any callback
+                        if(reachedBottom == false)
+                        {
+                            if (typeof _this.onEnd == "function") { _this.onEnd(); } reachedBottom = true;
+                            reachedBottom = true;
+                        }
+                    } else { reachedBottom = false; }
             }
 
-            // Reached top
-            if(evt.target.scrollTop <= 0)
-            {
-                if (typeof _this.onTop == "function") { _this.onTop(); }
-            }
+            // oTop callback()
+            if(evt.target.scrollTop <= 0){ if (typeof _this.onTop == "function") { _this.onTop(); } }
+            
 
         }
 
@@ -140,7 +159,7 @@ class LetMeScroll {
             contentPosition = scrollContentWrapper.scrollTop;
             scrollerBeingDragged = true;
 
-            // Dispatch event when drag is starting
+            // onDragStart callback()
             if (typeof _this.onDragStart == "function") { _this.onDragStart(); } 
         }
 
@@ -168,7 +187,6 @@ class LetMeScroll {
         ** Refresh scrollbar height
         */
         var refreshScroll = this.refreshScroll = function refreshScroll(evt) {
-        
             scrollerHeight = calculateScrollerHeight();
             scroller.style.height = scrollerHeight + 'px';
         }
@@ -243,8 +261,6 @@ class LetMeScroll {
                     scroller.addEventListener('mousedown', startDrag);
                     window.addEventListener('mouseup', stopDrag);
                     window.addEventListener('mousemove', scrollBarScroll);
-
-
                 }
                 
                 // *** Listeners ***
