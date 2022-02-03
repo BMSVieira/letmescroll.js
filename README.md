@@ -115,6 +115,15 @@ onDragStart: function(){ <!-- CODE HERE --> }
 // Called when Drag Stops
 onDragStop: function(){ <!-- CODE HERE --> }
 ```
+<b>Mobile Only</b>
+```javascript
+// Called when Touch starts
+onTouchStart: function(){ <!-- CODE HERE --> }
+```
+```javascript
+// Called when Touch Stops
+onTouchStop: function(){ <!-- CODE HERE --> }
+```
 ◼️ Styling :
 -
 
