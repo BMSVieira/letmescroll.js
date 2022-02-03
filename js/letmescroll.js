@@ -24,7 +24,9 @@ class LetMeScroll {
             onTop: function(){},
             onMove: function(){},
             onDragStart: function(){},
-            onDragStop: function(){}
+            onDragStop: function(){},
+            onTouchStart: function(){},
+            onTouchStop: function(){}
         };      
 
         // Scroll Random ID
@@ -36,6 +38,8 @@ class LetMeScroll {
         this.onMove = options.onMove || defaults.onMove;
         this.onDragStart = options.onDragStart || defaults.onDragStart;
         this.onDragStop = options.onDragStop || defaults.onDragStop;
+        this.onTouchStart = options.onTouchStart || defaults.onTouchStart;
+        this.onTouchStop = options.onTouchStop || defaults.onTouchStop;
 
         // Get default dimensions
         options.config.dimensions == undefined ? options.config.dimensions = defaults.config.dimensions : options.config.dimensions
@@ -293,13 +297,24 @@ class LetMeScroll {
                     scrollContainer.addEventListener("mouseover", function(){ _this.hideElement(scroller, 1); }); 
                     scrollContainer.addEventListener("mouseout", function(){  _this.hideElement(scroller, 0); });    
                 } else {
-                    scrollContainer.addEventListener("touchstart", function(){ _this.hideElement(scroller, 1); }); 
-                    scrollContainer.addEventListener("touchend", function(){  _this.hideElement(scroller, 0); });   
+
+                    // Mobile event listeners
+                    scrollContainer.addEventListener("touchstart", function(){
+
+                        _this.hideElement(scroller, 1);
+
+                        // onTouchStart Callback for mobile
+                        if (typeof _this.onTouchStart == "function") { _this.onTouchStart(); } 
+                    }); 
+                    scrollContainer.addEventListener("touchend", function(){ 
+
+                        _this.hideElement(scroller, 0); 
+
+                        // onTouchStop Callback for mobile
+                        if (typeof _this.onTouchStop == "function") { _this.onTouchStop(); } 
+                    });   
                 }
-
-            }
-
-           
+            } 
         }
 
         // Init
