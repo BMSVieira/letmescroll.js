@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col-lg-12" style="border-bottom: 1px solid #1c2939; margin-bottom: 60px;">
                         <div class="mb-5 mb-lg-0 mb-lg-3" style="text-align:center; margin-top:70px; margin-bottom:28px!important;">
-                                <img src="https://raw.githubusercontent.com/BMSVieira/letmescroll.js/main/demo/img/letmescroll.png" style="max-width:600px; width:40%;">
+                        <img src="https://raw.githubusercontent.com/BMSVieira/letmescroll.js/main/demo/img/letmescroll.png" style="max-width:600px; width:40%;">
                         <p style=" font-size: 32pt; color: white; font-family: 'Cairo', sans-serif;">Scroll made easy!</p>
                          <a href="https://github.com/BMSVieira/letmescroll.js" target="_blank" style="cursor:pointer;" class="btn btn-dark  btn-sm">View on Github</a>
                         </div>
@@ -171,7 +171,8 @@ Event console...
                             height : "300px"
                         },
                         scroll : {
-                          bottomOffset: 0
+                          bottomOffset: 0,
+                          autoHide: true
                         }
                   },
                   onEnd: function(){
@@ -185,6 +186,9 @@ Event console...
                   },
                   onDragStart: function(){
                     document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_started'><b style='color:#ededed'>onDragStart:</b>  Drag has started.</p>");
+                  },
+                  onDragStop: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_stopped'><b style='color:#ededed'>onDragStop:</b>  Drag has stopped.</p>");
                   }
                 });
         });

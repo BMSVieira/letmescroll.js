@@ -16,19 +16,20 @@ Made by: Bruno Vieira
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    padding-right: 24px;
+    padding-right: 15px;
     max-width: 99%; /* 1% is for the scrollbar div */
 }
 
-.lms_scrollable.lms_showScroll::after {
-    position: absolute;
-    content: '';
-    top: 0%;
-    right: 3px;
-    height: 100%;
-    width: 8px;
+.lms_scroll_track
+{
     background: var(--lms_scrollpath_bg);
-    border-radius: var(--lms_scrollpath_radius);
+    border-radius: var(--lms_scrollpath_radius);  
+    width: 8px;
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    top: 0px;
+    transition: opacity 0.5s ease;
 }
 
 .lms_scrollable .lms_content_wrapper {
@@ -45,14 +46,13 @@ Made by: Bruno Vieira
 }
 
 .lms_scroller {
+    cursor: default;
     z-index: 5;
-    cursor: pointer;
     position: absolute;
-    width: 8px;
+    width: 100%;
     border-radius: var(--lms_scrollbar_radius);
     background: var(--lms_scrollbar_bg);
     top: 0px;
-    right: 3px;
     -webkit-transition: top .08s;
     -moz-transition: top .08s;
     -ms-transition: top .08s;

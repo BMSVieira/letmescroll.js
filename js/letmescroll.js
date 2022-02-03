@@ -16,13 +16,15 @@ class LetMeScroll {
                     height : "500px"
                 },
                 scroll : {
-                    bottomOffset: 0
+                    bottomOffset: 0,
+                    autoHide: false
                 }
             },
             onEnd: function(){},
             onTop: function(){},
             onMove: function(){},
-            onDragStart: function(){}
+            onDragStart: function(){},
+            onDragStop: function(){}
         };      
 
         // Scroll Random ID
@@ -68,6 +70,13 @@ class LetMeScroll {
             if (/iPad|iPhone|iPod/i.test(userAgent)){
                 return 'ios';
             }
+        }
+
+        /*
+        ** Hide Elements
+        */
+        var hideElement = this.hideElement = function hideElement(element, value) {
+            element.style.opacity = value;
         }
 
         /*
@@ -147,7 +156,6 @@ class LetMeScroll {
             // oTop callback()
             if(evt.target.scrollTop <= 0){ if (typeof _this.onTop == "function") { _this.onTop(); } }
             
-
         }
 
         /*
@@ -169,7 +177,13 @@ class LetMeScroll {
         var stopDrag = this.stopDrag = function stopDrag(evt) {
 
             // Dispatch event when drag is stoppped
-            scrollerBeingDragged = false;
+            if(scrollerBeingDragged == true)
+            {
+                scrollerBeingDragged = false;
+                // OnDragStop callback()
+                if (typeof _this.onDragStop == "function") { _this.onDragStop(); } 
+            }
+
         }
 
         /*
@@ -223,14 +237,20 @@ class LetMeScroll {
             let selectorElementHTML = selectorElement.innerHTML;
             selectorElement.innerHTML = "";
 
-            // Criar uma div e colocar la todo o conteudo
+            // Creates div main div
             selectorElement.insertAdjacentHTML("afterbegin", "<div id='scroll_inner_"+randomID+"' class='lms_content_wrapper'></div>");
             let scrollInner = document.getElementById("scroll_inner_"+randomID);
   
-            scrollInner.insertAdjacentHTML("afterbegin", "<div id='scroll_content_"+randomID+"' class='lms_content'></div>");
+            // Creates div and track div
+            scrollInner.insertAdjacentHTML("afterbegin", "<div id='scroll_content_"+randomID+"' class='lms_content'></div> <div id='lms_track_"+randomID+"' class='lms_scroll_track'></div>");
             let scrollContent = document.getElementById("scroll_content_"+randomID);
+            let scrollTrack = document.getElementById("lms_track_"+randomID);
+
+            // Content from original elements into the created elements
             scrollContent.innerHTML = selectorElementHTML;
 
+            // Define variables from new elements
+            this.scrollTrack = scrollTrack;
             this.scrollElement = scrollInner;
             this.scrollContent = scrollContent;
             this.mainElement = selectorElement;
@@ -238,33 +258,48 @@ class LetMeScroll {
             scrollContainer = selectorElement;
             scrollContentWrapper = scrollInner;
 
+            // Calculate scrollbar height
+            scrollerHeight = calculateScrollerHeight();
+            
+            // Check if scrollbar is needed based on height
+            if (scrollerHeight / scrollContainer.offsetHeight < 1){
+
                 // Creat scrollbar div
-                scroller = document.createElement("div");
-                scroller.className = 'lms_scroller';
+                scrollTrack.insertAdjacentHTML("beforeend", "<div id='lms_scroller_"+randomID+"' class='lms_scroller'></div>");
+                scroller = document.getElementById("lms_scroller_"+randomID);
                 this.scroller = scroller;
 
-                // Calculate scrollbar height
-                scrollerHeight = calculateScrollerHeight();
+                // Apply scrollbar height
+                scroller.style.height = scrollerHeight + 'px';
+            
+                // Show scroll path divot
+                scrollContainer.className += ' lms_showScroll';
                 
-                if (scrollerHeight / scrollContainer.offsetHeight < 1){
+                // Attach related draggable listeners
+                scroller.addEventListener('mousedown', startDrag);
+                window.addEventListener('mouseup', stopDrag);
+                window.addEventListener('mousemove', scrollBarScroll);
+            }
+            
+            // Add global listeners
+            scrollContentWrapper.addEventListener('scroll', moveScroller);
 
-                    // Apply scrollbar height
-                    scroller.style.height = scrollerHeight + 'px';
-
-                    // Append scroller to scrollContainer div
-                    scrollContainer.appendChild(scroller);
-                    
-                    // Show scroll path divot
-                    scrollContainer.className += ' lms_showScroll';
-                    
-                    // Attach related draggable listeners
-                    scroller.addEventListener('mousedown', startDrag);
-                    window.addEventListener('mouseup', stopDrag);
-                    window.addEventListener('mousemove', scrollBarScroll);
+            // Check if options are available
+            if(options.config.scroll.autoHide == true)
+            {   
+                this.hideElement(scroller, 0);
+                if(!androidOrIOS()) // Check if it is mobile
+                {
+                    scrollContainer.addEventListener("mouseover", function(){ _this.hideElement(scroller, 1); }); 
+                    scrollContainer.addEventListener("mouseout", function(){  _this.hideElement(scroller, 0); });    
+                } else {
+                    scrollContainer.addEventListener("touchstart", function(){ _this.hideElement(scroller, 1); }); 
+                    scrollContainer.addEventListener("touchend", function(){  _this.hideElement(scroller, 0); });   
                 }
-                
-                // *** Listeners ***
-                scrollContentWrapper.addEventListener('scroll', moveScroller);
+
+            }
+
+           
         }
 
         // Init
