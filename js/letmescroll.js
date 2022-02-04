@@ -392,6 +392,8 @@ class LetMeScroll {
     {
         // Refresh scrollbar height
         this.refreshScroll();
+        // Fix scroll offset when new item is added
+        this.scrollTo(this.scrollElement.scrollTop);
     }
 
     // rebuild scroll
@@ -400,6 +402,25 @@ class LetMeScroll {
         // rebuild scroll
         this.SetupScroll();
     }
+
+    // Append items to scroll container
+    appendTo(properties) {
+        
+        // Get position e check if position is undefined.
+        var position = properties.position;
+        if(position == undefined) { var position = "beforeend"; }
+
+        if(properties.items && typeof(properties.items) === 'object')
+        {
+            // Loop object and add new options to original select box
+            var prop = Object.keys(properties.items).length;
+            for (var i = 0; i < prop; i++) {
+                this.scrollContent.insertAdjacentHTML(position, properties.items[i].content);
+            }
+        }
+
+        this.refresh();
+    } 
 
     /*
     ** API > Gets
