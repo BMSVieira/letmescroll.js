@@ -109,7 +109,7 @@ Add new content to the scroll container
 | `items` | `object` | Options to add to original selectbox |
 
 ```javascript
-demo1.appendTo({
+demo.appendTo({
     position: "afterbegin",
     items : {
             0: {
