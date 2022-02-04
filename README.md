@@ -54,7 +54,17 @@ document.addEventListener("DOMContentLoaded", function() {
    });
 });
 ```
+◼️ CDN:
+-
+You can use our CDN (provided by JSDelivr) for the JavaScript and CSS files.
 
+```html
+// Javascript
+<script src="https://cdn.jsdelivr.net/gh/BMSVieira/letmescroll.js@latest/js/letmescroll.js"></script>
+
+// CSS
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/BMSVieira/letmescroll.js@latest/css/letmescroll.css">
+```
 ◼️ Methods:
 -
 
