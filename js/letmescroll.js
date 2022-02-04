@@ -308,37 +308,37 @@ class LetMeScroll {
                 window.addEventListener('mousemove', scrollBarScroll);
             }
             
-            // Add global listeners
             scrollContentWrapper.addEventListener('scroll', moveScroller);
-            scrollTrack.addEventListener('click', checkTrackClick);
-            // Check if options are available
 
-            if(options.config.scroll.autoHide == true)
-            {   
-                this.hideElement(scroller, 0);
-                if(!androidOrIOS()) // Check if it is mobile
-                {
+            // Add global listeners
+            if(!androidOrIOS())
+            {
+                // Global listeners for Desktop
+                scrollTrack.addEventListener('click', checkTrackClick);
+
+                if(options.config.scroll.autoHide == true)
+                {   
+                    this.hideElement(scroller, 0);
                     scrollContainer.addEventListener("mouseover", function(){ _this.hideElement(scroller, 1); }); 
-                    scrollContainer.addEventListener("mouseout", function(){  _this.hideElement(scroller, 0); });    
-                } else {
+                    scrollContainer.addEventListener("mouseout", function(){  _this.hideElement(scroller, 0); });  
+                } 
+                
+            } else {
 
-                    // Mobile event listeners
-                    scrollContainer.addEventListener("touchstart", function(){
+                // Hide scroll onload
+                if(options.config.scroll.autoHide == true){  _this.hideElement(scroller, 0); }
 
-                        _this.hideElement(scroller, 1);
+                // Global listeners for Mobile
+                scrollContainer.addEventListener("touchstart", function(){
+                    if (typeof _this.onTouchStart == "function") { _this.onTouchStart(); } 
+                    if(options.config.scroll.autoHide == true) { _this.hideElement(scroller, 1);} 
+                }); 
+                scrollContainer.addEventListener("touchend", function(){ 
+                    if (typeof _this.onTouchStop == "function") { _this.onTouchStop(); } 
+                    if(options.config.scroll.autoHide == true) { _this.hideElement(scroller, 0); } 
+                });   
+            }
 
-                        // onTouchStart Callback for mobile
-                        if (typeof _this.onTouchStart == "function") { _this.onTouchStart(); } 
-                    }); 
-                    scrollContainer.addEventListener("touchend", function(){ 
-
-                        _this.hideElement(scroller, 0); 
-
-                        // onTouchStop Callback for mobile
-                        if (typeof _this.onTouchStop == "function") { _this.onTouchStop(); } 
-                    });   
-                }
-            } 
         }
 
         // Init
