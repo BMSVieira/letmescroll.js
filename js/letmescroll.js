@@ -32,6 +32,7 @@ class LetMeScroll {
         // Scroll Random ID
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
         
+        this.randomID = randomID;
         this.selector = options.selector.substring(1) || defaults.selector.substring(1);
         this.onEnd = options.onEnd || defaults.onEnd;
         this.onTop = options.onTop || defaults.onTop;
@@ -322,7 +323,7 @@ class LetMeScroll {
                     scrollContainer.addEventListener("mouseover", function(){ _this.hideElement(scroller, 1); }); 
                     scrollContainer.addEventListener("mouseout", function(){  _this.hideElement(scroller, 0); });  
                 } 
-                
+
             } else {
 
                 // Hide scroll onload
@@ -400,6 +401,16 @@ class LetMeScroll {
         this.SetupScroll();
     }
 
+    /*
+    ** API > Gets
+    */
+
+    // Get main element Id
+    get mainElementId() { return "scroll_content_"+this.randomID; }
+    // Get scrollbar id
+    get scrollbarId() { return "lms_scroller_"+this.randomID; }
+    // Get trackbar id
+    get trackbarId() { return "lms_track_"+this.randomID; }
 }
 
 // Export module to use it in browser and NodeJS
