@@ -90,6 +90,25 @@ Type | Description |
 demo.scrollTo(200);
 ```
  
+<b>appendTo:</b>
+Add new content to the scroll container
+ 
+| Name | Value | Description |
+| --- | --- | --- |
+| `position` | `afterbegin` or `beforeend` | Add new items at beginning or ending of the container |
+| `items` | `object` | Options to add to original selectbox |
+
+```javascript
+demo1.appendTo({
+    position: "afterbegin",
+    items : {
+            0: {
+                content: '<!-- HTML ELEMENT HERE -->'
+            }
+    }
+});
+```
+ 
 ◼️ Callbacks:
 -
 
@@ -124,6 +143,20 @@ onTouchStart: function(){ <!-- CODE HERE --> }
 // Called when Touch Stops
 onTouchStop: function(){ <!-- CODE HERE --> }
 ```
+ ◼️ API > Gets:
+-
+```javascript
+// Returns container DOM element (With this one, you can add new content)
+demo.mainElementId
+
+// Returns scrollbar container id
+demo.scrollbarId
+
+// Returns trackbar container id
+demo.trackbarId
+```
+ 
+ 
 ◼️ Styling :
 -
 
