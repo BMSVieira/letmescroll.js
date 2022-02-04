@@ -30,6 +30,7 @@ Made by: Bruno Vieira
     height: 100%;
     top: 0px;
     transition: opacity 0.5s ease;
+    user-select: none;
 }
 
 .lms_scrollable .lms_content_wrapper {

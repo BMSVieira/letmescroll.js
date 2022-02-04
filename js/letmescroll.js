@@ -77,6 +77,29 @@ class LetMeScroll {
         }
 
         /*
+        ** Check Track Click
+        */
+        var checkTrackClick = this.checkTrackClick = function checkTrackClick(evt) {
+
+            // Check if it is clicking in the scrollbar
+            if(evt.target.classList[0] != "lms_scroller")
+            {
+                // if it is before the scrollbar, goes up
+                if(evt.layerY < scroller.offsetTop)
+                {
+                    _this.scroller.style.top = _this.scroller.style.top-20;
+                    _this.scrollElement.scrollTop = _this.scrollElement.scrollTop-40;
+                }
+                // if is is after the scrollbar, goes down
+                if(evt.layerY > scroller.offsetTop)
+                {
+                    _this.scroller.style.top = _this.scroller.style.top+20;
+                    _this.scrollElement.scrollTop = _this.scrollElement.scrollTop+40;
+                }
+            }
+        }
+
+        /*
         ** Hide Elements
         */
         var hideElement = this.hideElement = function hideElement(element, value) {
@@ -287,8 +310,9 @@ class LetMeScroll {
             
             // Add global listeners
             scrollContentWrapper.addEventListener('scroll', moveScroller);
-
+            scrollTrack.addEventListener('click', checkTrackClick);
             // Check if options are available
+
             if(options.config.scroll.autoHide == true)
             {   
                 this.hideElement(scroller, 0);
