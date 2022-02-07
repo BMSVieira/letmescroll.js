@@ -14,6 +14,7 @@
 - 💪 No dependencies, built with VanillaJS
 - 🌎 Tested in all modern browsers
 - 🖌 Easy Customization
+- 📢 Multiple Callbacks
 
 ◼️ Demo:
 -
@@ -127,6 +128,10 @@ demo.appendTo({
 
 There are multiple callbacks you can use when building a new instance.
 
+ ```javascript
+// Called when LetMeScroll is initialized
+onComplete: function(){ <!-- CODE HERE --> }
+```
 ```javascript
 // Called when scrollbar reaches the bottom.
 onEnd: function(){ <!-- CODE HERE --> }
