@@ -115,7 +115,10 @@ demo.appendTo({
             0: {
                 content: '<!-- HTML ELEMENT HERE -->'
             }
-    }
+    },
+    onComplete: function(){
+        <!-- CODE HERE -->
+    } 
 });
 ```
  
