@@ -44,6 +44,10 @@
         {
             color: orange;
         }
+        .pre_init
+        {
+            color: #fffd71;
+        }
 
         .ball {
             width: 25px;
@@ -134,7 +138,7 @@
                                 <button style="cursor:pointer;" type="button" onclick="showMenu('console')" class="btn btn-dark  btn-sm">Show Console</button>
                             </div>
                             <div id="id_console">
-                            <pre id="lms_console" style="background-color: #070b0f; padding: 15px; height:240px; overflow-y:hidden; border-radius:8px;">
+                            <pre id="lms_console" style="background-color: #070b0f; padding: 15px; height:300px; overflow-y:hidden; border-radius:8px;">
 Event console...
                             </pre>
                             </div>
@@ -151,6 +155,7 @@ Event console...
             <span style="color: #d0d0d0">autoHide:</span> <span style="color: #3677a9"> false</span>
         <span style="color: #d0d0d0">}</span>
     <span style="color: #d0d0d0">},</span>
+    <span style="color: #d0d0d0">onComplete:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
     <span style="color: #d0d0d0">onEnd:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
     <span style="color: #d0d0d0">onTop:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
     <span style="color: #d0d0d0">onMove:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
@@ -185,6 +190,9 @@ Event console...
                           bottomOffset: 0,
                           autoHide: false
                         }
+                  },
+                  onComplete: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_init'><b style='color:#ededed'>onComplete:</b> LetMeScroll initialized.</p>");
                   },
                   onEnd: function(){
                     document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_bottom'><b style='color:#ededed'>onEnd:</b> Scroll has reached the end.</p>");

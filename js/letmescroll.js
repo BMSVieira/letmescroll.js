@@ -20,6 +20,7 @@ class LetMeScroll {
                     autoHide: false
                 }
             },
+            onComplete: function(){},
             onEnd: function(){},
             onTop: function(){},
             onMove: function(){},
@@ -34,6 +35,7 @@ class LetMeScroll {
         
         this.randomID = randomID;
         this.selector = options.selector.substring(1) || defaults.selector.substring(1);
+        this.onComplete = options.onComplete || defaults.onComplete;
         this.onEnd = options.onEnd || defaults.onEnd;
         this.onTop = options.onTop || defaults.onTop;
         this.onMove = options.onMove || defaults.onMove;
@@ -340,6 +342,8 @@ class LetMeScroll {
                 });   
             }
 
+            // onComplete callback() when LetMeScroll is initialized
+            if (typeof this.onComplete == "function") { this.onComplete(); } 
         }
 
         // Init
