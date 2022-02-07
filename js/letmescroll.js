@@ -231,8 +231,17 @@ class LetMeScroll {
         ** Refresh scrollbar height
         */
         var refreshScroll = this.refreshScroll = function refreshScroll(evt) {
+
             scrollerHeight = calculateScrollerHeight();
-            scroller.style.height = scrollerHeight + 'px';
+            if (scrollerHeight / scrollContainer.offsetHeight < 1){
+                // Show track
+                _this.scrollTrack.style.display = "block";
+                scroller.style.height = scrollerHeight + 'px';
+            } else {
+                // Hide track
+                _this.scrollTrack.style.display = "none";
+                scroller.style.height = '0px';
+            }
         }
 
         /*
@@ -272,7 +281,7 @@ class LetMeScroll {
             let scrollInner = document.getElementById("scroll_inner_"+randomID);
   
             // Creates div and track div
-            scrollInner.insertAdjacentHTML("afterbegin", "<div id='scroll_content_"+randomID+"' class='lms_content'></div> <div id='lms_track_"+randomID+"' class='lms_scroll_track'></div>");
+            scrollInner.insertAdjacentHTML("afterbegin", "<div id='scroll_content_"+randomID+"' class='lms_content'></div> <div style='display:none;' id='lms_track_"+randomID+"' class='lms_scroll_track'></div>");
             let scrollContent = document.getElementById("scroll_content_"+randomID);
             let scrollTrack = document.getElementById("lms_track_"+randomID);
 
@@ -291,24 +300,24 @@ class LetMeScroll {
             // Calculate scrollbar height
             scrollerHeight = calculateScrollerHeight();
             
+            // Creat scrollbar div
+            scrollTrack.insertAdjacentHTML("beforeend", "<div id='lms_scroller_"+randomID+"' class='lms_scroller'></div>");
+            scroller = document.getElementById("lms_scroller_"+randomID);
+            this.scroller = scroller;
+
+            // Attach related draggable listeners
+            scroller.addEventListener('mousedown', startDrag);
+            window.addEventListener('mouseup', stopDrag);
+            window.addEventListener('mousemove', scrollBarScroll);
+
             // Check if scrollbar is needed based on height
             if (scrollerHeight / scrollContainer.offsetHeight < 1){
-
-                // Creat scrollbar div
-                scrollTrack.insertAdjacentHTML("beforeend", "<div id='lms_scroller_"+randomID+"' class='lms_scroller'></div>");
-                scroller = document.getElementById("lms_scroller_"+randomID);
-                this.scroller = scroller;
-
                 // Apply scrollbar height
                 scroller.style.height = scrollerHeight + 'px';
-            
+                // Show track
+                this.scrollTrack.style.display = "block";
                 // Show scroll path divot
                 scrollContainer.className += ' lms_showScroll';
-                
-                // Attach related draggable listeners
-                scroller.addEventListener('mousedown', startDrag);
-                window.addEventListener('mouseup', stopDrag);
-                window.addEventListener('mousemove', scrollBarScroll);
             }
             
             scrollContentWrapper.addEventListener('scroll', moveScroller);
