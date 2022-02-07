@@ -40,6 +40,10 @@
         {
             color: #ff6c00;
         }
+        .pre_added
+        {
+            color: orange;
+        }
 
         .ball {
             width: 25px;
@@ -96,6 +100,9 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div style="margin-bottom:25px;">
+                            <button style="cursor:pointer;" type="button" onclick="append()" class="btn btn-dark  btn-sm">Add Content</button>
+                            </div>
                             <div class="d-flex"><i class="bi-layers m-auto text-primary"></i></div>
                             <div id="scrollme">
                                 <h3>Super easy-to-use scrollbar</h3>
@@ -141,7 +148,7 @@ Event console...
         <span style="color: #d0d0d0">},</span>
         <span style="color: #d0d0d0">scroll</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">{</span>
             <span style="color: #d0d0d0">bottomOffset:</span> <span style="color: #3677a9">0,</span>
-            <span style="color: #d0d0d0">autoHide:</span> <span style="color: #3677a9"> true</span>
+            <span style="color: #d0d0d0">autoHide:</span> <span style="color: #3677a9"> false</span>
         <span style="color: #d0d0d0">}</span>
     <span style="color: #d0d0d0">},</span>
     <span style="color: #d0d0d0">onEnd:</span> <span style="color: #6ab825; font-weight: bold">function</span><span style="color: #d0d0d0">(){},</span>
@@ -176,7 +183,7 @@ Event console...
                         },
                         scroll : {
                           bottomOffset: 0,
-                          autoHide: true
+                          autoHide: false
                         }
                   },
                   onEnd: function(){
@@ -225,6 +232,21 @@ Event console...
                 document.getElementById("id_html").style.display = "none";
                 document.getElementById("id_console").style.display = "none";                
             }
+        }
+
+        function append()
+        {
+            demo1.appendTo({
+                    position: "beforeend",
+                    items : {
+                        0: {
+                            content: '<p><b>[New Content Added]</b> ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus maxime voluptatem quasi. Recusandae optio nobis ratione iste consectetur consequatur cupiditate saepe laborum natus neque a provident eum explicabo delectus qui accusantium nostrum reiciendis soluta hic ut at sed laboriosam possimus repudiandae deserunt velit rerum. Aliquam ratione itaque corrupti aperiam quisquam unde aspernatur odio id repellendus corporis eaque expedita in ab minus possimus! Quo tempore consequatur repellat consectetur nemo molestiae perferendis ipsum esse nesciunt blanditiis nobis dicta? Laudantium quaerat inventore deleniti exercitationem explicabo quos pariatur sunt earum labore sed eius blanditiis architecto consequuntur ad consectetur unde sapiente nisi. Sunt eos.</p>'
+                        }
+                    },
+                    onComplete: function(){
+                    document.getElementById("lms_console").insertAdjacentHTML("afterbegin", "<p class='pre_added'><b style='color:#ededed'>onComplete:</b> New content added.</p>");
+                    } 
+            });
         }
 
         </script>

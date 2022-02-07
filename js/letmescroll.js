@@ -404,8 +404,13 @@ class LetMeScroll {
     }
 
     // Append items to scroll container
-    appendTo(properties) {
+    async appendTo(properties) {
         
+        // OnComplete Callback
+        function onComplete(callback) { 
+            if (typeof callback == "function") { callback();}
+        } 
+
         // Get position e check if position is undefined.
         var position = properties.position;
         if(position == undefined) { var position = "beforeend"; }
@@ -419,7 +424,11 @@ class LetMeScroll {
             }
         }
 
+        // Refresh scrollbar position because of the new content
         this.refresh();
+
+        // if is "onComplete" is a function, call it back.
+        if (typeof properties.onComplete == "function") { onComplete(properties.onComplete); }
     } 
 
     /*
