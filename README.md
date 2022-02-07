@@ -54,7 +54,17 @@ document.addEventListener("DOMContentLoaded", function() {
    });
 });
 ```
+◼️ CDN:
+-
+You can use our CDN (provided by JSDelivr) for the JavaScript and CSS files.
 
+```html
+// Javascript
+<script src="https://cdn.jsdelivr.net/gh/BMSVieira/letmescroll.js@latest/js/letmescroll.js"></script>
+
+// CSS
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/BMSVieira/letmescroll.js@latest/css/letmescroll.css">
+```
 ◼️ Methods:
 -
 
@@ -88,6 +98,25 @@ Type | Description |
 
 ```javascript
 demo.scrollTo(200);
+```
+ 
+<b>appendTo:</b>
+Add new content to the scroll container
+ 
+| Name | Value | Description |
+| --- | --- | --- |
+| `position` | `afterbegin` or `beforeend` | Add new items at beginning or ending of the container |
+| `items` | `object` | Options to add to original selectbox |
+
+```javascript
+demo.appendTo({
+    position: "afterbegin",
+    items : {
+            0: {
+                content: '<!-- HTML ELEMENT HERE -->'
+            }
+    }
+});
 ```
  
 ◼️ Callbacks:
@@ -124,6 +153,20 @@ onTouchStart: function(){ <!-- CODE HERE --> }
 // Called when Touch Stops
 onTouchStop: function(){ <!-- CODE HERE --> }
 ```
+ ◼️ API > Gets:
+-
+```javascript
+// Returns container DOM element (With this one, you can add new content)
+demo.mainElementId
+
+// Returns scrollbar container id
+demo.scrollbarId
+
+// Returns trackbar container id
+demo.trackbarId
+```
+ 
+ 
 ◼️ Styling :
 -
 
