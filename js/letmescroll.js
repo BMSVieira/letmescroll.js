@@ -269,9 +269,11 @@ class LetMeScroll {
 
             // Obter o element
             let selectorElement = document.getElementById(this.selector);
+            // Save original css
+            let originCss = selectorElement.style.cssText;
 
             selectorElement.classList.add("lms_scrollable");
-            selectorElement.style.cssText = 'width:'+options.config.dimensions.width+';height:'+options.config.dimensions.height;
+            selectorElement.style.cssText = originCss+' width:'+options.config.dimensions.width+';height:'+options.config.dimensions.height;
 
             let selectorElementHTML = selectorElement.innerHTML;
             selectorElement.innerHTML = "";
