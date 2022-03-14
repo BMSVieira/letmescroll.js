@@ -43,6 +43,7 @@ class LetMeScroll {
         this.onDragStop = options.onDragStop || defaults.onDragStop;
         this.onTouchStart = options.onTouchStart || defaults.onTouchStart;
         this.onTouchStop = options.onTouchStop || defaults.onTouchStop;
+        if(!options.config){ options.config = defaults.config;}
 
         // Get default dimensions
         options.config.dimensions == undefined ? options.config.dimensions = defaults.config.dimensions : options.config.dimensions
