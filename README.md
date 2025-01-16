@@ -1,5 +1,5 @@
 <br><p align="center">
-<img width="450" src="https://raw.githubusercontent.com/BMSVieira/letmescroll.js/main/demo/img/letmescroll.png?token=GHSAT0AAAAAABLNGOUJ6XQPSAWIBDLY5ZZEYPZUQ3A">
+<img width="450" src="https://raw.githubusercontent.com/BMSVieira/letmescroll.js/refs/heads/main/demo/img/letmescroll.png">
 </p>
 
 
